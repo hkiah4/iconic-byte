@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portfolio Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Big Background Text -->
+  <div class="background-text">Portfolio</div>
+
+  <!-- Main Content -->
+  <div class="content-container">
+    <header>
+      <h2>My Creative Portfolio</h2>
+      <p>Explore my work and projects below</p>
+    </header>
+
+    <!-- Portfolio Buttons -->
+    <div class="artist-buttons">
+      <button class="portfolio-button" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">Project 1</button>
+      <button class="portfolio-button" data-video="https://www.youtube.com/embed/3fumBcKC6RE">Project 2</button>
+      <button class="portfolio-button" data-video="https://www.youtube.com/embed/V-_O7nl0Ii0">Project 3</button>
+    </div>
+
+    <!-- Cards Section -->
+    <div class="card-section">
+      <div class="card">
+        <h2>Design</h2>
+        <p>High-quality UI/UX projects demonstrating clean and user-friendly design.</p>
+      </div>
+      <div class="card">
+        <h2>Development</h2>
+        <p>Interactive websites and apps built using modern frameworks and tools.</p>
+      </div>
+      <div class="card">
+        <h2>Media</h2>
+        <p>Video editing, animations, and other creative multimedia work.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="videoModal" aria-hidden="true">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <iframe id="videoFrame" src="" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 My Portfolio. All rights reserved.</p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    const buttons = document.querySelectorAll('.portfolio-button');
+    const modal = document.getElementById('videoModal');
+    const videoFrame = document.getElementById('videoFrame');
+    const closeBtn = document.querySelector('.close');
+
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        const videoURL = button.getAttribute('data-video');
+        videoFrame.src = videoURL + "?autoplay=1&rel=0";
+        modal.style.display = 'flex';
+        modal.setAttribute('aria-hidden', 'false');
+      });
+    });
+
+    closeBtn.addEventListener('click', () => {
+      modal.style.display = 'none';
+      videoFrame.src = "";
+    });
+
+    window.addEventListener('keydown', e => {
+      if (e.key === "Escape" && modal.style.display === 'flex') {
+        modal.style.display = 'none';
+        videoFrame.src = "";
+      }
+    });
+  </script>
+</body>
+</html>
